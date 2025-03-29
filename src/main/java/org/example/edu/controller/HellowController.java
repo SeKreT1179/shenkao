@@ -12,13 +12,4 @@ public class HellowController {
         return "Hello " + name;
     }
 
-    @GetMapping("/student")
-    public Student getStudent() {
-        Student st = new Student(1,
-                "valera",
-                "valera@ya.ru",
-                19);
-        return st;
-    }
-
 }
