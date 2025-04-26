@@ -1,9 +1,22 @@
-package org.example.edu.model;
+package com.exsample.edu.model;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Entity
+@NoArgsConstructor
+@Table(name = "student")
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "age")
     private int age;
 
     public Student(long id, String name, String email, int age) {
@@ -11,6 +24,22 @@ public class Student {
         this.name = name;
         this.email = email;
         this.age = age;
+    }
+
+    public Student(String name, String email, int age) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
     }
 
     public long getId() {
@@ -28,14 +57,4 @@ public class Student {
     public int getAge() {
         return age;
     }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
+}

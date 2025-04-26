@@ -1,44 +1,60 @@
-package org.example.edu.repository;
+package com.exsample.edu.model;
 
-import org.example.edu.model.Student;
-import org.springframework.stereotype.Repository;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+@Data
+@Entity
+@NoArgsConstructor
+@Table(name = "student")
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "age")
+    private int age;
 
-@Repository
-public class StudentRepository {
-    private List<Student> studentList = new ArrayList<>();
-
-    public List<Student> getStudentList() {
-        return studentList;
+    public Student(long id, String name, String email, int age) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
     }
 
-    public long save(Student st) {
-        studentList.add(st);
-        return st.getId();
+    public Student(String name, String email, int age) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
     }
 
-
-    public Student getById(long id) {
-        Student findStudent = null;
-
-        for(Student st: studentList){
-            if (st.getId() == id) {
-                findStudent = st;
-            }
-        }
-        return findStudent;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
     }
 
-    public void deleteById(long id) {
-        int indexDeleteStudent = -1;
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getId() == id) {
-                indexDeleteStudent = i;
-            }
-        }
-        studentList.remove(indexDeleteStudent);
+    public long getId() {
+        return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }
